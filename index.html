@@ -1,0 +1,2922 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeuanganKu – Smart Finance Tracker</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="transparent">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --secondary: #64748b;
+      --background: #f8fafc;
+      --surface: #ffffff;
+      --surface-hover: #f1f5f9;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --income: #22c55e;
+      --expense: #ef4444;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --gradient-start: #3b82f6;
+      --gradient-end: #8b5cf6;
+    }
+
+    [data-theme="dark-pro"] {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --secondary: #94a3b8;
+      --background: #0f172a;
+      --surface: #1e293b;
+      --surface-hover: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --success: #4ade80;
+      --danger: #f87171;
+      --warning: #fbbf24;
+      --income: #4ade80;
+      --expense: #f87171;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --gradient-start: #6366f1;
+      --gradient-end: #a855f7;
+    }
+
+    [data-theme="midnight-blue"] {
+      --primary: #0ea5e9;
+      --primary-hover: #0284c7;
+      --secondary: #7dd3fc;
+      --background: #0c1929;
+      --surface: #132f4c;
+      --surface-hover: #1a3a5c;
+      --text-primary: #e0f2fe;
+      --text-secondary: #7dd3fc;
+      --border: #1e4976;
+      --success: #22d3ee;
+      --danger: #fb7185;
+      --warning: #fcd34d;
+      --income: #22d3ee;
+      --expense: #fb7185;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --gradient-start: #0ea5e9;
+      --gradient-end: #06b6d4;
+    }
+
+    [data-theme="cyber-neon"] {
+      --primary: #f0abfc;
+      --primary-hover: #e879f9;
+      --secondary: #a5f3fc;
+      --background: #0a0a0a;
+      --surface: #18181b;
+      --surface-hover: #27272a;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --border: #3f3f46;
+      --success: #4ade80;
+      --danger: #fb7185;
+      --warning: #facc15;
+      --income: #4ade80;
+      --expense: #fb7185;
+      --shadow: rgba(240, 171, 252, 0.2);
+      --gradient-start: #f0abfc;
+      --gradient-end: #818cf8;
+    }
+
+    [data-theme="emerald-finance"] {
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --secondary: #6ee7b7;
+      --background: #ecfdf5;
+      --surface: #ffffff;
+      --surface-hover: #d1fae5;
+      --text-primary: #064e3b;
+      --text-secondary: #047857;
+      --border: #a7f3d0;
+      --success: #10b981;
+      --danger: #f43f5e;
+      --warning: #f59e0b;
+      --income: #10b981;
+      --expense: #f43f5e;
+      --shadow: rgba(16, 185, 129, 0.15);
+      --gradient-start: #10b981;
+      --gradient-end: #14b8a6;
+    }
+
+    [data-theme="sunset-orange"] {
+      --primary: #f97316;
+      --primary-hover: #ea580c;
+      --secondary: #fdba74;
+      --background: #fff7ed;
+      --surface: #ffffff;
+      --surface-hover: #ffedd5;
+      --text-primary: #7c2d12;
+      --text-secondary: #c2410c;
+      --border: #fed7aa;
+      --success: #22c55e;
+      --danger: #dc2626;
+      --warning: #f97316;
+      --income: #22c55e;
+      --expense: #dc2626;
+      --shadow: rgba(249, 115, 22, 0.15);
+      --gradient-start: #f97316;
+      --gradient-end: #ef4444;
+    }
+
+    [data-theme="royal-purple"] {
+      --primary: #8b5cf6;
+      --primary-hover: #7c3aed;
+      --secondary: #c4b5fd;
+      --background: #faf5ff;
+      --surface: #ffffff;
+      --surface-hover: #f3e8ff;
+      --text-primary: #4c1d95;
+      --text-secondary: #6d28d9;
+      --border: #ddd6fe;
+      --success: #22c55e;
+      --danger: #e11d48;
+      --warning: #f59e0b;
+      --income: #22c55e;
+      --expense: #e11d48;
+      --shadow: rgba(139, 92, 246, 0.15);
+      --gradient-start: #8b5cf6;
+      --gradient-end: #d946ef;
+    }
+
+    [data-theme="ocean-aqua"] {
+      --primary: #06b6d4;
+      --primary-hover: #0891b2;
+      --secondary: #67e8f9;
+      --background: #ecfeff;
+      --surface: #ffffff;
+      --surface-hover: #cffafe;
+      --text-primary: #164e63;
+      --text-secondary: #0e7490;
+      --border: #a5f3fc;
+      --success: #10b981;
+      --danger: #f43f5e;
+      --warning: #eab308;
+      --income: #10b981;
+      --expense: #f43f5e;
+      --shadow: rgba(6, 182, 212, 0.15);
+      --gradient-start: #06b6d4;
+      --gradient-end: #3b82f6;
+    }
+
+    [data-theme="earth-brown"] {
+      --primary: #a16207;
+      --primary-hover: #854d0e;
+      --secondary: #d97706;
+      --background: #fefce8;
+      --surface: #ffffff;
+      --surface-hover: #fef9c3;
+      --text-primary: #422006;
+      --text-secondary: #713f12;
+      --border: #fde047;
+      --success: #65a30d;
+      --danger: #dc2626;
+      --warning: #d97706;
+      --income: #65a30d;
+      --expense: #dc2626;
+      --shadow: rgba(161, 98, 7, 0.15);
+      --gradient-start: #a16207;
+      --gradient-end: #ca8a04;
+    }
+
+    [data-theme="rose-pink"] {
+      --primary: #ec4899;
+      --primary-hover: #db2777;
+      --secondary: #f9a8d4;
+      --background: #fdf2f8;
+      --surface: #ffffff;
+      --surface-hover: #fce7f3;
+      --text-primary: #831843;
+      --text-secondary: #be185d;
+      --border: #fbcfe8;
+      --success: #22c55e;
+      --danger: #e11d48;
+      --warning: #f59e0b;
+      --income: #22c55e;
+      --expense: #e11d48;
+      --shadow: rgba(236, 72, 153, 0.15);
+      --gradient-start: #ec4899;
+      --gradient-end: #f43f5e;
+    }
+
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    .keuanganku-sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+    }
+
+    .keuanganku-nav-item {
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .keuanganku-nav-item:hover {
+      background: var(--surface-hover);
+      color: var(--primary);
+    }
+
+    .keuanganku-nav-item.active {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      box-shadow: 0 4px 15px var(--shadow);
+    }
+
+    .keuanganku-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+      border-radius: 16px;
+    }
+
+    .keuanganku-card-3d {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow), 0 10px 40px -10px var(--shadow);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .keuanganku-card-3d::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    }
+
+    .keuanganku-btn-primary {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .keuanganku-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--shadow);
+    }
+
+    .keuanganku-btn-secondary {
+      background: var(--surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .keuanganku-btn-secondary:hover {
+      background: var(--surface-hover);
+      border-color: var(--primary);
+    }
+
+    .keuanganku-input {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .keuanganku-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--shadow);
+      outline: none;
+    }
+
+    .keuanganku-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .keuanganku-loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .keuanganku-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .keuanganku-animate-fade {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .keuanganku-animate-slide {
+      animation: slideIn 0.4s ease forwards;
+    }
+
+    .keuanganku-animate-scale {
+      animation: scaleIn 0.3s ease forwards;
+    }
+
+    .keuanganku-bottom-nav {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 20px var(--shadow);
+    }
+
+    .keuanganku-bottom-nav-item {
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .keuanganku-bottom-nav-item.active {
+      color: var(--primary);
+    }
+
+    .keuanganku-bottom-nav-item.active i {
+      transform: scale(1.2);
+    }
+
+    .keuanganku-progress-bar {
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .keuanganku-progress-fill {
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .keuanganku-stat-card {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px -10px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .keuanganku-stat-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .keuanganku-income {
+      color: var(--income);
+    }
+
+    .keuanganku-expense {
+      color: var(--expense);
+    }
+
+    .keuanganku-modal {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .keuanganku-modal-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 25px 50px -12px var(--shadow);
+      border-radius: 24px;
+    }
+
+    .keuanganku-theme-preview {
+      border: 3px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .keuanganku-theme-preview.active {
+      border-color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .keuanganku-warning-banner {
+      background: linear-gradient(135deg, var(--warning), #fbbf24);
+      color: #422006;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .keuanganku-table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .keuanganku-table th {
+      background: var(--surface-hover);
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .keuanganku-table td {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .keuanganku-table tr:hover td {
+      background: var(--surface-hover);
+    }
+
+    .keuanganku-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .keuanganku-badge-income {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--income);
+    }
+
+    .keuanganku-badge-expense {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--expense);
+    }
+
+    .keuanganku-drag-handle {
+      cursor: grab;
+      color: var(--text-secondary);
+    }
+
+    .keuanganku-drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .keuanganku-chart-bar {
+      transition: all 0.5s ease;
+    }
+
+    .keuanganku-toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+      padding: 12px 24px;
+      border-radius: 12px;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .keuanganku-empty-state {
+      color: var(--text-secondary);
+    }
+
+    .keuanganku-category-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .keuanganku-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .keuanganku-category-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .keuanganku-category-badge.active {
+      border-color: var(--primary);
+      background: var(--surface-hover);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--background);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .keuanganku-main-content {
+        padding-bottom: 80px;
+      }
+    }
+
+    /* Hilangkan background header modal kategori */
+    #keuanganku-category-modal .flex.items-center.justify-between.mb-6.sticky {
+      background: transparent !important;
+      background-color: transparent !important;
+      position: static !important;
+    }
+
+    /* ================================================= */
+    /* MOBILE CLEAN & RAPI - DAFTAR PEMASUKAN FINAL FIX */
+    /* ================================================= */
+    @media (max-width: 640px) {
+
+      /* ========================= */
+      /* CARD UTAMA */
+      /* ========================= */
+      #keuanganku-income-list>div {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px;
+      }
+
+      /* ========================= */
+      /* BARIS ATAS (Icon + Nama + Tanggal) */
+      /* ========================= */
+      #keuanganku-income-list>div>div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* ICON SUPAYA TETAP BULAT */
+      #keuanganku-income-list>div>div:first-child>div:first-child {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        min-height: 38px !important;
+
+        border-radius: 50% !important;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0 !important;
+      }
+
+      /* Container teks */
+      #keuanganku-income-list>div>div:first-child>div:last-child {
+        flex: 1;
+        min-width: 0;
+        /* penting untuk ellipsis */
+      }
+
+      /* Nama */
+      #keuanganku-income-list h4 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      /* Tanggal */
+      #keuanganku-income-list span.text-xs {
+        font-size: 11px;
+      }
+
+      /* ========================= */
+      /* DESKRIPSI AUTO ... */
+      /* ========================= */
+      #keuanganku-income-list p.text-xs {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* ========================= */
+      /* BARIS BAWAH (Jumlah + Action) */
+      /* ========================= */
+      #keuanganku-income-list>div>div:last-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Jumlah uang lebih tegas */
+      #keuanganku-income-list span.text-green-500 {
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+    }
+
+    /* ================================================= */
+    /* MOBILE CLEAN & RAPI - DAFTAR PENGELUARAN FINAL FIX */
+    /* ================================================= */
+    @media (max-width: 640px) {
+
+      /* ========================= */
+      /* CARD UTAMA */
+      /* ========================= */
+      #keuanganku-expense-list>div {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px;
+      }
+
+      /* ========================= */
+      /* BARIS ATAS (Icon + Nama + Tanggal) */
+      /* ========================= */
+      #keuanganku-expense-list>div>div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* ICON SUPAYA TETAP BULAT */
+      #keuanganku-expense-list>div>div:first-child>div:first-child {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        min-height: 38px !important;
+
+        border-radius: 50% !important;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0 !important;
+      }
+
+      /* Container teks */
+      #keuanganku-expense-list>div>div:first-child>div:last-child {
+        flex: 1;
+        min-width: 0;
+        /* penting untuk ellipsis */
+      }
+
+      /* Nama */
+      #keuanganku-expense-list h4 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      /* Tanggal */
+      #keuanganku-expense-list span.text-xs {
+        font-size: 11px;
+      }
+
+      /* ========================= */
+      /* DESKRIPSI AUTO ... */
+      /* ========================= */
+      #keuanganku-expense-list p.text-xs {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* ========================= */
+      /* BARIS BAWAH (Jumlah + Action) */
+      /* ========================= */
+      #keuanganku-expense-list>div>div:last-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Jumlah uang lebih tegas */
+      #keuanganku-expense-list span.text-green-500 {
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+    }
+
+    /* ================================= */
+    /* FIX MODAL LIST KATEGORI MOBILE   */
+    /* ================================= */
+
+    #keuanganku-categories-list-modal .sticky {
+      position: relative !important;
+      top: auto !important;
+    }
+  </style>
+</head>
+
+<body class="h-full">
+  <!-- Loading Overlay -->
+  <div id="keuanganku-loading" class="keuanganku-loading-overlay">
+    <div class="text-center">
+      <div class="keuanganku-spinner mx-auto mb-4"></div>
+      <h2 class="text-xl font-bold" style="color: var(--primary)">KeuanganKu</h2>
+      <p class="text-sm" style="color: var(--text-secondary)">Memuat aplikasi...</p>
+    </div>
+  </div>
+
+  <div id="keuanganku-app" class="h-full flex opacity-0">
+    <!-- Desktop Sidebar -->
+    <aside id="keuanganku-sidebar"
+      class="keuanganku-sidebar hidden md:flex flex-col w-64 h-full fixed left-0 top-0 z-50">
+      <div class="p-6 border-b" style="border-color: var(--border)">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+            style="background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end))">
+            <i class="fas fa-wallet text-white"></i>
+          </div>
+          <div>
+            <h1 id="keuanganku-title" class="font-bold text-lg" style="color: var(--text-primary)">KeuanganKu</h1>
+            <p class="text-xs" style="color: var(--text-secondary)">Smart Finance</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-2">
+        <button onclick="KeuanganKu.navigateTo('dashboard')"
+          class="keuanganku-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left"
+          data-page="dashboard">
+          <i class="fas fa-home w-5"></i>
+          <span>Dashboard</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('income')"
+          class="keuanganku-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left" data-page="income">
+          <i class="fas fa-arrow-down w-5"></i>
+          <span>Pemasukan</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('expense')"
+          class="keuanganku-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left" data-page="expense">
+          <i class="fas fa-arrow-up w-5"></i>
+          <span>Pengeluaran</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('targets')"
+          class="keuanganku-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left" data-page="targets">
+          <i class="fas fa-bullseye w-5"></i>
+          <span>Target</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('statistics')"
+          class="keuanganku-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left"
+          data-page="statistics">
+          <i class="fas fa-chart-pie w-5"></i>
+          <span>Statistik</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('settings')"
+          class="keuanganku-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left"
+          data-page="settings">
+          <i class="fas fa-cog w-5"></i>
+          <span>Pengaturan</span>
+        </button>
+      </nav>
+
+      <div class="p-4 border-t" style="border-color: var(--border)">
+        <div class="keuanganku-card p-4">
+          <p class="text-xs mb-2" style="color: var(--text-secondary)">Total Saldo</p>
+          <p id="keuanganku-sidebar-balance" class="text-xl font-bold" style="color: var(--primary)">Rp 0</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="keuanganku-main" class="keuanganku-main-content flex-1 md:ml-64 h-full overflow-auto">
+      <!-- Warning Banner -->
+      <div id="keuanganku-warning-banner" class="hidden keuanganku-warning-banner px-4 py-3 text-center font-medium">
+        <i class="fas fa-exclamation-triangle mr-2"></i>
+        <span id="keuanganku-warning-text"></span>
+      </div>
+
+      <!-- Page Content Container -->
+      <div id="keuanganku-content" class="p-4 md:p-6">
+        <!-- Dashboard Page -->
+        <div id="keuanganku-page-dashboard" class="keuanganku-page hidden">
+          <div class="keuanganku-animate-fade">
+            <h2 class="text-2xl font-bold mb-6" style="color: var(--text-primary)">Dashboard</h2>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div class="keuanganku-stat-card p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm opacity-80">Total Saldo</p>
+                    <p id="keuanganku-stat-balance" class="text-2xl font-bold mt-1">Rp 0</p>
+                  </div>
+                  <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                    <i class="fas fa-wallet text-xl"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="keuanganku-card-3d p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm" style="color: var(--text-secondary)">Pemasukan</p>
+                    <p id="keuanganku-stat-income" class="text-2xl font-bold mt-1 keuanganku-income">Rp 0</p>
+                  </div>
+                  <div class="w-12 h-12 rounded-full flex items-center justify-center"
+                    style="background: rgba(34,197,94,0.15)">
+                    <i class="fas fa-arrow-down keuanganku-income text-xl"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="keuanganku-card-3d p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm" style="color: var(--text-secondary)">Pengeluaran</p>
+                    <p id="keuanganku-stat-expense" class="text-2xl font-bold mt-1 keuanganku-expense">Rp 0</p>
+                  </div>
+                  <div class="w-12 h-12 rounded-full flex items-center justify-center"
+                    style="background: rgba(239,68,68,0.15)">
+                    <i class="fas fa-arrow-up keuanganku-expense text-xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Targets -->
+            <div id="keuanganku-active-targets" class="keuanganku-card-3d p-6 mb-6 hidden">
+              <h3 class="font-bold mb-4 flex items-center gap-2" style="color: var(--text-primary)">
+                <i class="fas fa-bullseye" style="color: var(--primary)"></i>
+                Target Aktif
+              </h3>
+              <div id="keuanganku-targets-list" class="space-y-4"></div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="keuanganku-card-3d p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold flex items-center gap-2" style="color: var(--text-primary)">
+                  <i class="fas fa-clock" style="color: var(--primary)"></i>
+                  Transaksi Terbaru
+                </h3>
+                <button onclick="KeuanganKu.navigateTo('income')" class="text-sm font-medium"
+                  style="color: var(--primary)">
+                  Lihat <i class="fas fa-arrow-right ml-1"></i>
+                </button>
+              </div>
+              <div id="keuanganku-recent-transactions" class="space-y-3">
+                <div class="keuanganku-empty-state text-center py-8">
+                  <i class="fas fa-receipt text-4xl mb-3 opacity-30"></i>
+                  <p>Belum ada transaksi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Income Page -->
+        <div id="keuanganku-page-income" class="keuanganku-page hidden">
+          <div class="keuanganku-animate-fade">
+            <div class="sticky top-0 z-40 mb-6 -mx-4 md:-mx-6 px-4 md:px-6 pt-4 pb-4"
+              style="background: var(--background); border-bottom: 1px solid var(--border)">
+              <div class="flex items-center justify-between gap-3">
+                <h2 class="text-2xl font-bold" style="color: var(--text-primary)">Pemasukan</h2>
+                <div class="flex gap-2">
+                  <button onclick="KeuanganKu.openTransactionModal('income')"
+                    class="keuanganku-btn-primary px-4 py-2 rounded-xl font-medium whitespace-nowrap">
+                    <i class="fas fa-plus mr-2"></i>Tambah
+                  </button>
+                  <button onclick="KeuanganKu.openCategoriesListModal('income')"
+                    class="keuanganku-btn-primary px-4 py-2 rounded-xl font-medium whitespace-nowrap">
+                    <i class="fas fa-tag ml-1"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="keuanganku-card-3d p-6 mb-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm" style="color: var(--text-secondary)">Total Pemasukan</p>
+                  <p id="keuanganku-income-total" class="text-3xl font-bold mt-1 keuanganku-income">Rp 0</p>
+                </div>
+                <div class="w-16 h-16 rounded-full flex items-center justify-center"
+                  style="background: rgba(34,197,94,0.15)">
+                  <i class="fas fa-arrow-down keuanganku-income text-2xl"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="keuanganku-card p-6">
+              <h3 class="font-bold mb-4" style="color: var(--text-primary)">Daftar Pemasukan</h3>
+              <div id="keuanganku-income-list" class="space-y-3">
+                <div class="keuanganku-empty-state text-center py-8">
+                  <i class="fas fa-piggy-bank text-4xl mb-3 opacity-30"></i>
+                  <p>Belum ada pemasukan</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expense Page -->
+        <div id="keuanganku-page-expense" class="keuanganku-page hidden">
+          <div class="keuanganku-animate-fade">
+            <div class="sticky top-0 z-40 mb-6 -mx-4 md:-mx-6 px-4 md:px-6 pt-4 pb-4"
+              style="background: var(--background); border-bottom: 1px solid var(--border)">
+              <div class="flex items-center justify-between gap-3">
+                <h2 class="text-2xl font-bold" style="color: var(--text-primary)">Pengeluaran</h2>
+                <div class="flex gap-2">
+                  <button onclick="KeuanganKu.openTransactionModal('expense')"
+                    class="keuanganku-btn-primary px-4 py-2 rounded-xl font-medium whitespace-nowrap">
+                    <i class="fas fa-plus mr-2"></i>Tambah
+                  </button>
+                  <button onclick="KeuanganKu.openCategoriesListModal('expense')"
+                    class="keuanganku-btn-primary px-4 py-2 rounded-xl font-medium whitespace-nowrap">
+                    <i class="fas fa-tag ml-1"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="keuanganku-card-3d p-6 mb-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm" style="color: var(--text-secondary)">Total Pengeluaran</p>
+                  <p id="keuanganku-expense-total" class="text-3xl font-bold mt-1 keuanganku-expense">Rp 0</p>
+                </div>
+                <div class="w-16 h-16 rounded-full flex items-center justify-center"
+                  style="background: rgba(239,68,68,0.15)">
+                  <i class="fas fa-arrow-up keuanganku-expense text-2xl"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="keuanganku-card p-6">
+              <h3 class="font-bold mb-4" style="color: var(--text-primary)">Daftar Pengeluaran</h3>
+              <div id="keuanganku-expense-list" class="space-y-3">
+                <div class="keuanganku-empty-state text-center py-8">
+                  <i class="fas fa-shopping-cart text-4xl mb-3 opacity-30"></i>
+                  <p>Belum ada pengeluaran</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Targets Page -->
+        <div id="keuanganku-page-targets" class="keuanganku-page hidden">
+          <div class="keuanganku-animate-fade">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-bold" style="color: var(--text-primary)">Target Keuangan</h2>
+              <button onclick="KeuanganKu.openTargetModal()"
+                class="keuanganku-btn-primary px-4 py-2 rounded-xl font-medium">
+                <i class="fas fa-plus mr-2"></i>Tambah
+              </button>
+            </div>
+
+            <div id="keuanganku-all-targets" class="space-y-4">
+              <div class="keuanganku-empty-state text-center py-12 keuanganku-card">
+                <i class="fas fa-flag-checkered text-4xl mb-3 opacity-30"></i>
+                <p>Belum ada target keuangan</p>
+                <button onclick="KeuanganKu.openTargetModal()"
+                  class="keuanganku-btn-primary px-4 py-2 rounded-xl font-medium mt-4">
+                  <i class="fas fa-plus mr-2"></i>Buat Target Pertama
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Page -->
+        <div id="keuanganku-page-statistics" class="keuanganku-page hidden">
+          <div class="keuanganku-animate-fade">
+            <h2 class="text-2xl font-bold mb-6" style="color: var(--text-primary)">Statistik Keuangan</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="keuanganku-card-3d p-6">
+                <h3 class="font-bold mb-4" style="color: var(--text-primary)">Ringkasan</h3>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center">
+                    <span style="color: var(--text-secondary)">Total Pemasukan</span>
+                    <span id="keuanganku-stats-income" class="font-bold keuanganku-income">Rp 0</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span style="color: var(--text-secondary)">Total Pengeluaran</span>
+                    <span id="keuanganku-stats-expense" class="font-bold keuanganku-expense">Rp 0</span>
+                  </div>
+                  <div class="border-t pt-4" style="border-color: var(--border)">
+                    <div class="flex justify-between items-center">
+                      <span class="font-medium" style="color: var(--text-primary)">Saldo Bersih</span>
+                      <span id="keuanganku-stats-balance" class="font-bold text-xl" style="color: var(--primary)">Rp
+                        0</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="keuanganku-card-3d p-6">
+                <h3 class="font-bold mb-4" style="color: var(--text-primary)">Perbandingan</h3>
+                <div id="keuanganku-comparison-chart" class="h-40 flex items-end justify-center gap-8">
+                  <div class="text-center">
+                    <div id="keuanganku-chart-income-bar" class="keuanganku-chart-bar w-16 rounded-t-lg"
+                      style="height: 20px; background: var(--income)"></div>
+                    <p class="text-xs mt-2" style="color: var(--text-secondary)">Pemasukan</p>
+                  </div>
+                  <div class="text-center">
+                    <div id="keuanganku-chart-expense-bar" class="keuanganku-chart-bar w-16 rounded-t-lg"
+                      style="height: 20px; background: var(--expense)"></div>
+                    <p class="text-xs mt-2" style="color: var(--text-secondary)">Pengeluaran</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="keuanganku-card p-6">
+                <h3 class="font-bold mb-4" style="color: var(--text-primary)">
+                  <i class="fas fa-arrow-down keuanganku-income mr-2"></i>Pemasukan per Kategori
+                </h3>
+                <div id="keuanganku-income-stats" class="space-y-3">
+                  <p class="text-center py-4" style="color: var(--text-secondary)">Belum ada data</p>
+                </div>
+              </div>
+
+              <div class="keuanganku-card p-6">
+                <h3 class="font-bold mb-4" style="color: var(--text-primary)">
+                  <i class="fas fa-arrow-up keuanganku-expense mr-2"></i>Pengeluaran per Kategori
+                </h3>
+                <div id="keuanganku-expense-stats" class="space-y-3">
+                  <p class="text-center py-4" style="color: var(--text-secondary)">Belum ada data</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div id="keuanganku-page-settings" class="keuanganku-page hidden">
+          <div class="keuanganku-animate-fade">
+            <h2 class="text-2xl font-bold mb-6" style="color: var(--text-primary)">Pengaturan</h2>
+
+            <!-- Theme Selection -->
+            <div class="keuanganku-card-3d p-6 mb-6">
+              <h3 class="font-bold mb-4" style="color: var(--text-primary)">
+                <i class="fas fa-palette mr-2" style="color: var(--primary)"></i>Tema Aplikasi
+              </h3>
+              <div id="keuanganku-themes" class="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            </div>
+
+            <!-- Income Categories -->
+            <div class="keuanganku-card p-6 mb-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold" style="color: var(--text-primary)">
+                  <i class="fas fa-arrow-down keuanganku-income mr-2"></i>Kategori Pemasukan
+                </h3>
+                <button onclick="KeuanganKu.openCategoryModal('income')"
+                  class="keuanganku-btn-primary px-3 py-1.5 rounded-lg text-sm">
+                  <i class="fas fa-plus mr-1"></i>Tambah
+                </button>
+              </div>
+              <div id="keuanganku-income-categories" class="space-y-2"></div>
+            </div>
+
+            <!-- Expense Categories -->
+            <div class="keuanganku-card p-6 mb-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold" style="color: var(--text-primary)">
+                  <i class="fas fa-arrow-up keuanganku-expense mr-2"></i>Kategori Pengeluaran
+                </h3>
+                <button onclick="KeuanganKu.openCategoryModal('expense')"
+                  class="keuanganku-btn-primary px-3 py-1.5 rounded-lg text-sm">
+                  <i class="fas fa-plus mr-1"></i>Tambah
+                </button>
+              </div>
+              <div id="keuanganku-expense-categories" class="space-y-2"></div>
+            </div>
+
+            <!-- Data Management -->
+            <div class="keuanganku-card p-6">
+              <h3 class="font-bold mb-4" style="color: var(--text-primary)">
+                <i class="fas fa-database mr-2" style="color: var(--primary)"></i>Manajemen Data
+              </h3>
+              <div class="space-y-3">
+                <button onclick="KeuanganKu.exportData()"
+                  class="keuanganku-btn-secondary w-full px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-medium">
+                  <i class="fas fa-download"></i>
+                  <span>Export Data (JSON)</span>
+                </button>
+                <label
+                  class="keuanganku-btn-secondary w-full px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-medium cursor-pointer">
+                  <i class="fas fa-upload"></i>
+                  <span>Import Data (JSON)</span>
+                  <input type="file" id="keuanganku-import-file" accept=".json" style="display: none"
+                    onchange="KeuanganKu.importData(event)">
+                </label>
+                <button onclick="KeuanganKu.confirmResetData()"
+                  class="w-full px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-white font-medium"
+                  style="background: var(--danger)">
+                  <i class="fas fa-trash-alt"></i>
+                  <span>Hapus Semua Data</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav id="keuanganku-bottom-nav" class="keuanganku-bottom-nav fixed bottom-0 left-0 right-0 md:hidden z-50">
+      <div class="flex items-center justify-around py-2">
+        <button onclick="KeuanganKu.navigateTo('dashboard')"
+          class="keuanganku-bottom-nav-item flex flex-col items-center p-2" data-page="dashboard">
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs mt-1">Home</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('income')"
+          class="keuanganku-bottom-nav-item flex flex-col items-center p-2" data-page="income">
+          <i class="fas fa-arrow-down text-xl"></i>
+          <span class="text-xs mt-1">Masuk</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('expense')"
+          class="keuanganku-bottom-nav-item flex flex-col items-center p-2" data-page="expense">
+          <i class="fas fa-arrow-up text-xl"></i>
+          <span class="text-xs mt-1">Keluar</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('targets')"
+          class="keuanganku-bottom-nav-item flex flex-col items-center p-2" data-page="targets">
+          <i class="fas fa-bullseye text-xl"></i>
+          <span class="text-xs mt-1">Target</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('statistics')"
+          class="keuanganku-bottom-nav-item flex flex-col items-center p-2" data-page="statistics">
+          <i class="fas fa-chart-pie text-xl"></i>
+          <span class="text-xs mt-1">Statistik</span>
+        </button>
+        <button onclick="KeuanganKu.navigateTo('settings')"
+          class="keuanganku-bottom-nav-item flex flex-col items-center p-2" data-page="settings">
+          <i class="fas fa-cog text-xl"></i>
+          <span class="text-xs mt-1">Setting</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Transaction Modal -->
+  <div id="keuanganku-transaction-modal"
+    class="keuanganku-modal fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="keuanganku-modal-content w-full max-w-md p-6 keuanganku-animate-scale">
+      <div class="flex items-center justify-between mb-6">
+        <h3 id="keuanganku-transaction-modal-title" class="text-xl font-bold" style="color: var(--text-primary)">Tambah
+          Transaksi</h3>
+        <button onclick="KeuanganKu.closeTransactionModal()"
+          class="w-8 h-8 rounded-full flex items-center justify-center" style="background: var(--surface-hover)">
+          <i class="fas fa-times" style="color: var(--text-secondary)"></i>
+        </button>
+      </div>
+      <form id="keuanganku-transaction-form" onsubmit="KeuanganKu.saveTransaction(event)">
+        <input type="hidden" id="keuanganku-transaction-id">
+        <input type="hidden" id="keuanganku-transaction-type">
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Nominal</label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 font-medium"
+                style="color: var(--text-secondary)">Rp</span>
+              <input type="number" id="keuanganku-transaction-amount"
+                class="keuanganku-input w-full pl-12 pr-4 py-3 rounded-xl" placeholder="0" required min="1">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Kategori</label>
+            <select id="keuanganku-transaction-category" class="keuanganku-input w-full px-4 py-3 rounded-xl" required>
+              <option value="">Pilih Kategori</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Tanggal</label>
+            <input type="date" id="keuanganku-transaction-date" class="keuanganku-input w-full px-4 py-3 rounded-xl"
+              required>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Deskripsi
+              (Opsional)</label>
+            <textarea id="keuanganku-transaction-description" class="keuanganku-input w-full px-4 py-3 rounded-xl"
+              rows="2" placeholder="Tambahkan catatan..."></textarea>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <button type="button" onclick="KeuanganKu.closeTransactionModal()"
+            class="keuanganku-btn-secondary flex-1 py-3 rounded-xl font-medium">
+            Batal
+          </button>
+          <button type="submit" class="keuanganku-btn-primary flex-1 py-3 rounded-xl font-medium">
+            Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Target Modal -->
+  <div id="keuanganku-target-modal"
+    class="keuanganku-modal fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="keuanganku-modal-content w-full max-w-md p-6 keuanganku-animate-scale">
+      <div class="flex items-center justify-between mb-6">
+        <h3 id="keuanganku-target-modal-title" class="text-xl font-bold" style="color: var(--text-primary)">Tambah
+          Target</h3>
+        <button onclick="KeuanganKu.closeTargetModal()" class="w-8 h-8 rounded-full flex items-center justify-center"
+          style="background: var(--surface-hover)">
+          <i class="fas fa-times" style="color: var(--text-secondary)"></i>
+        </button>
+      </div>
+      <form id="keuanganku-target-form" onsubmit="KeuanganKu.saveTarget(event)">
+        <input type="hidden" id="keuanganku-target-id">
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Nama Target</label>
+            <input type="text" id="keuanganku-target-name" class="keuanganku-input w-full px-4 py-3 rounded-xl"
+              placeholder="Contoh: Dana Darurat" required>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Target Nominal</label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 font-medium"
+                style="color: var(--text-secondary)">Rp</span>
+              <input type="number" id="keuanganku-target-amount"
+                class="keuanganku-input w-full pl-12 pr-4 py-3 rounded-xl" placeholder="0" required min="1">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Tanggal Mulai</label>
+              <input type="date" id="keuanganku-target-start" class="keuanganku-input w-full px-4 py-3 rounded-xl"
+                required>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Tanggal Selesai</label>
+              <input type="date" id="keuanganku-target-end" class="keuanganku-input w-full px-4 py-3 rounded-xl"
+                required>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <button type="button" onclick="KeuanganKu.closeTargetModal()"
+            class="keuanganku-btn-secondary flex-1 py-3 rounded-xl font-medium">
+            Batal
+          </button>
+          <button type="submit" class="keuanganku-btn-primary flex-1 py-3 rounded-xl font-medium">
+            Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Categories List Modal -->
+  <div id="keuanganku-categories-list-modal"
+    class="keuanganku-modal fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="keuanganku-modal-content w-full max-w-2xl p-6 keuanganku-animate-scale max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-6 sticky top-0 z-50 -mx-6 px-6 pt-0 pb-4 bg-inherit"
+        style="border-bottom: 1px solid var(--border)">
+        <h3 id="keuanganku-categories-list-title" class="text-xl font-bold" style="color: var(--text-primary)">Daftar
+          Kategori</h3>
+        <button onclick="KeuanganKu.closeCategoriesListModal()"
+          class="w-8 h-8 rounded-full flex items-center justify-center" style="background: var(--surface-hover)">
+          <i class="fas fa-times" style="color: var(--text-secondary)"></i>
+        </button>
+      </div>
+
+      <div class="mb-6 sticky top-16 z-40 -mx-6 px-6 pb-4 bg-inherit" style="border-bottom: 1px solid var(--border)">
+        <button onclick="KeuanganKu.openCategoryModal()"
+          class="keuanganku-btn-primary w-full px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-medium">
+          <i class="fas fa-plus"></i>
+          <span id="keuanganku-categories-list-add-label">Tambah Kategori Baru</span>
+        </button>
+      </div>
+
+      <div id="keuanganku-categories-list-container" class="space-y-2"></div>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div id="keuanganku-category-modal"
+    class="keuanganku-modal fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="keuanganku-modal-content w-full max-w-2xl p-6 keuanganku-animate-scale max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-6 sticky top-0 bg-inherit">
+        <h3 id="keuanganku-category-modal-title" class="text-xl font-bold" style="color: var(--text-primary)">Tambah
+          Kategori</h3>
+        <button onclick="KeuanganKu.closeCategoryModal()" class="w-8 h-8 rounded-full flex items-center justify-center"
+          style="background: var(--surface-hover)">
+          <i class="fas fa-times" style="color: var(--text-secondary)"></i>
+        </button>
+      </div>
+      <form id="keuanganku-category-form" onsubmit="KeuanganKu.saveCategory(event)">
+        <input type="hidden" id="keuanganku-category-id">
+        <input type="hidden" id="keuanganku-category-type">
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Nama Kategori</label>
+            <input type="text" id="keuanganku-category-name" class="keuanganku-input w-full px-4 py-3 rounded-xl"
+              placeholder="Contoh: Gaji" required>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-3" style="color: var(--text-secondary)">Pilih Icon</label>
+            <div id="keuanganku-category-icons" class="grid grid-cols-5 md:grid-cols-8 gap-2"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary)">Warna</label>
+            <input type="color" id="keuanganku-category-color"
+              class="keuanganku-input w-full h-12 rounded-xl cursor-pointer" value="#3b82f6">
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <button type="button" onclick="KeuanganKu.closeCategoryModal()"
+            class="keuanganku-btn-secondary flex-1 py-3 rounded-xl font-medium">
+            Batal
+          </button>
+          <button type="submit" class="keuanganku-btn-primary flex-1 py-3 rounded-xl font-medium">
+            Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirm Modal -->
+  <div id="keuanganku-confirm-modal"
+    class="keuanganku-modal fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="keuanganku-modal-content w-full max-w-sm p-6 keuanganku-animate-scale text-center">
+      <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
+        style="background: rgba(239,68,68,0.15)">
+        <i class="fas fa-exclamation-triangle text-2xl" style="color: var(--danger)"></i>
+      </div>
+      <h3 id="keuanganku-confirm-title" class="text-xl font-bold mb-2" style="color: var(--text-primary)">Konfirmasi
+      </h3>
+      <p id="keuanganku-confirm-message" class="mb-6" style="color: var(--text-secondary)">Apakah Anda yakin?</p>
+      <div class="flex gap-3">
+        <button onclick="KeuanganKu.closeConfirmModal()"
+          class="keuanganku-btn-secondary flex-1 py-3 rounded-xl font-medium">
+          Batal
+        </button>
+        <button id="keuanganku-confirm-btn" class="flex-1 py-3 rounded-xl font-medium text-white"
+          style="background: var(--danger)">
+          Hapus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="keuanganku-toast" class="keuanganku-toast hidden">
+    <span id="keuanganku-toast-message"></span>
+  </div>
+
+  <!-- Install PWA Modal -->
+  <div id="keuanganku-install-modal"
+    class="keuanganku-modal fixed inset-0 z-[200] hidden items-center justify-center p-4">
+    <div class="keuanganku-modal-content w-full max-w-sm p-6 keuanganku-animate-scale text-center">
+      <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center"
+        style="background: rgba(59,130,246,0.15)">
+        <i class="fas fa-download text-2xl" style="color: var(--primary)"></i>
+      </div>
+
+      <h3 class="text-xl font-bold mb-2">Install Aplikasi</h3>
+      <p class="mb-6" style="color: var(--text-secondary)">
+        Tambahkan KeuanganKu ke layar utama agar bisa digunakan seperti aplikasi native.
+      </p>
+
+      <div class="flex gap-3">
+        <button onclick="KeuanganKu.closeInstallModal()"
+          class="keuanganku-btn-secondary flex-1 py-3 rounded-xl font-medium">
+          Nanti
+        </button>
+        <button onclick="KeuanganKu.installPWA()" class="keuanganku-btn-primary flex-1 py-3 rounded-xl font-medium">
+          Install
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const KeuanganKu = (function () {
+      // Database
+      let db = null;
+      const DB_NAME = 'KeuanganKuDB';
+      const DB_VERSION = 1;
+
+      // App State
+      let currentPage = 'dashboard';
+      let appTitle = 'KeuanganKu';
+      let currentCategoryType = 'income';
+      let selectedCategoryIcon = 'fa-money-bill';
+
+      //PWA
+      let deferredPrompt = null;
+      let isPWAInstalled = false;
+
+      // Complete Font Awesome Free Icons (60+ verified free icons)
+      const fontAwesomeIcons = [
+        // Finance & Business
+        'fa-wallet', 'fa-money-bill', 'fa-dollar-sign', 'fa-coins', 'fa-credit-card',
+        'fa-chart-line', 'fa-chart-bar', 'fa-chart-pie', 'fa-briefcase', 'fa-building',
+        'fa-landmark', 'fa-store', 'fa-cash-register', 'fa-calculator', 'fa-scale-balanced',
+        'fa-file-invoice', 'fa-file-invoice-dollar', 'fa-hand-holding-dollar', 'fa-piggy-bank',
+
+        // Home & Living
+        'fa-home', 'fa-house', 'fa-house-user', 'fa-key', 'fa-bed', 'fa-couch', 'fa-chair',
+        'fa-door-open', 'fa-door-closed', 'fa-lightbulb', 'fa-fan', 'fa-toilet', 'fa-shower',
+        'fa-bath', 'fa-sink', 'fa-broom', 'fa-trash', 'fa-recycle',
+
+        // Shopping & Food
+        'fa-shopping-cart', 'fa-shopping-bag', 'fa-bag-shopping', 'fa-tag', 'fa-tags',
+        'fa-utensils', 'fa-burger', 'fa-pizza-slice', 'fa-hotdog', 'fa-ice-cream',
+        'fa-mug-hot', 'fa-mug-saucer', 'fa-wine-glass', 'fa-wine-glass-empty',
+        'fa-bottle-water', 'fa-blender', 'fa-kitchen-set',
+
+        // Transport & Travel
+        'fa-car', 'fa-taxi', 'fa-bus', 'fa-train', 'fa-plane', 'fa-motorcycle', 'fa-bicycle',
+        'fa-ship', 'fa-truck', 'fa-truck-fast', 'fa-gas-pump', 'fa-road', 'fa-route',
+        'fa-suitcase', 'fa-suitcase-rolling', 'fa-location-dot', 'fa-map-location-dot',
+
+        // Technology & Work
+        'fa-desktop', 'fa-laptop', 'fa-mobile-screen', 'fa-tablet-screen-button',
+        'fa-keyboard', 'fa-mouse', 'fa-server', 'fa-database', 'fa-code', 'fa-bug',
+        'fa-wifi', 'fa-signal', 'fa-cloud', 'fa-hard-drive', 'fa-microchip',
+
+        // Education & Productivity
+        'fa-book', 'fa-book-open', 'fa-graduation-cap', 'fa-school', 'fa-pen', 'fa-pen-nib',
+        'fa-pencil', 'fa-notebook', 'fa-clipboard', 'fa-clipboard-list',
+        'fa-calendar', 'fa-calendar-days', 'fa-clock', 'fa-hourglass', 'fa-stopwatch',
+
+        // Health & Lifestyle
+        'fa-heart', 'fa-heart-pulse', 'fa-hospital', 'fa-pills', 'fa-stethoscope',
+        'fa-dumbbell', 'fa-running', 'fa-person-walking', 'fa-person-biking',
+        'fa-spa', 'fa-leaf', 'fa-apple-whole', 'fa-carrot', 'fa-seedling',
+
+        // Entertainment & Media
+        'fa-gamepad', 'fa-dice', 'fa-film', 'fa-video', 'fa-music', 'fa-guitar',
+        'fa-headphones', 'fa-microphone', 'fa-radio', 'fa-camera', 'fa-photo-film',
+        'fa-palette', 'fa-paintbrush', 'fa-mask', 'fa-ticket',
+
+        // People & Social
+        'fa-user', 'fa-users', 'fa-user-group', 'fa-id-card', 'fa-address-card',
+        'fa-handshake', 'fa-hand-holding-heart', 'fa-thumbs-up', 'fa-thumbs-down',
+        'fa-comments', 'fa-comment-dots', 'fa-bell', 'fa-bell-slash',
+
+        // Files & Documents
+        'fa-file', 'fa-file-lines', 'fa-file-pdf', 'fa-file-excel', 'fa-file-word',
+        'fa-folder', 'fa-folder-open', 'fa-receipt', 'fa-scroll', 'fa-archive',
+        'fa-box', 'fa-box-open', 'fa-boxes-stacked', 'fa-truck-ramp-box',
+
+        // Status & System
+        'fa-check', 'fa-circle-check', 'fa-xmark', 'fa-circle-xmark',
+        'fa-triangle-exclamation', 'fa-circle-info', 'fa-question',
+        'fa-lock', 'fa-unlock', 'fa-shield', 'fa-shield-halved',
+        'fa-power-off', 'fa-bolt', 'fa-battery-full', 'fa-battery-half',
+
+        // Nature & Misc
+        'fa-sun', 'fa-moon', 'fa-cloud-rain', 'fa-cloud-sun', 'fa-snowflake',
+        'fa-tree', 'fa-seedling', 'fa-mountain', 'fa-water',
+        'fa-gift', 'fa-award', 'fa-medal', 'fa-trophy', 'fa-star', 'fa-fire'
+      ];
+
+      // Theme definitions
+      const themes = [
+        { id: 'light-clean', name: 'Light Clean', colors: ['#3b82f6', '#f8fafc', '#ffffff', '#1e293b', '#22c55e'] },
+        { id: 'dark-pro', name: 'Dark Pro', colors: ['#6366f1', '#0f172a', '#1e293b', '#f1f5f9', '#4ade80'] },
+        { id: 'midnight-blue', name: 'Midnight Blue', colors: ['#0ea5e9', '#0c1929', '#132f4c', '#e0f2fe', '#22d3ee'] },
+        { id: 'cyber-neon', name: 'Cyber Neon', colors: ['#f0abfc', '#0a0a0a', '#18181b', '#fafafa', '#4ade80'] },
+        { id: 'emerald-finance', name: 'Emerald Finance', colors: ['#10b981', '#ecfdf5', '#ffffff', '#064e3b', '#10b981'] },
+        { id: 'sunset-orange', name: 'Sunset Orange', colors: ['#f97316', '#fff7ed', '#ffffff', '#7c2d12', '#22c55e'] },
+        { id: 'royal-purple', name: 'Royal Purple', colors: ['#8b5cf6', '#faf5ff', '#ffffff', '#4c1d95', '#22c55e'] },
+        { id: 'ocean-aqua', name: 'Ocean Aqua', colors: ['#06b6d4', '#ecfeff', '#ffffff', '#164e63', '#10b981'] },
+        { id: 'earth-brown', name: 'Earth Brown', colors: ['#a16207', '#fefce8', '#ffffff', '#422006', '#65a30d'] },
+        { id: 'rose-pink', name: 'Rose Pink', colors: ['#ec4899', '#fdf2f8', '#ffffff', '#831843', '#22c55e'] }
+      ];
+
+      // Default categories
+      const defaultIncomeCategories = [
+        { id: 'inc_1', name: 'Gaji', icon: 'fa-briefcase', color: '#22c55e', order: 0 },
+        { id: 'inc_2', name: 'Freelance', icon: 'fa-laptop', color: '#3b82f6', order: 1 },
+        { id: 'inc_3', name: 'Investasi', icon: 'fa-chart-line', color: '#8b5cf6', order: 2 },
+        { id: 'inc_4', name: 'Hadiah', icon: 'fa-gift', color: '#f59e0b', order: 3 },
+        { id: 'inc_5', name: 'Lainnya', icon: 'fa-money-bill', color: '#64748b', order: 4 }
+      ];
+
+      const defaultExpenseCategories = [
+        { id: 'exp_1', name: 'Makanan', icon: 'fa-utensils', color: '#ef4444', order: 0 },
+        { id: 'exp_2', name: 'Transportasi', icon: 'fa-car', color: '#f97316', order: 1 },
+        { id: 'exp_3', name: 'Belanja', icon: 'fa-shopping-bag', color: '#ec4899', order: 2 },
+        { id: 'exp_4', name: 'Tagihan', icon: 'fa-file', color: '#6366f1', order: 3 },
+        { id: 'exp_5', name: 'Kesehatan', icon: 'fa-heart', color: '#14b8a6', order: 4 },
+        { id: 'exp_6', name: 'Hiburan', icon: 'fa-gamepad', color: '#a855f7', order: 5 },
+        { id: 'exp_7', name: 'Lainnya', icon: 'fa-wallet', color: '#64748b', order: 6 }
+      ];
+
+      // Initialize IndexedDB
+      async function initDB() {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+          request.onerror = () => reject(request.error);
+          request.onsuccess = () => {
+            db = request.result;
+            resolve(db);
+          };
+
+          request.onupgradeneeded = (event) => {
+            const database = event.target.result;
+
+            // Transactions store
+            if (!database.objectStoreNames.contains('transactions')) {
+              const txStore = database.createObjectStore('transactions', { keyPath: 'id' });
+              txStore.createIndex('type', 'type', { unique: false });
+              txStore.createIndex('date', 'date', { unique: false });
+              txStore.createIndex('category', 'category', { unique: false });
+            }
+
+            // Categories store
+            if (!database.objectStoreNames.contains('categories')) {
+              const catStore = database.createObjectStore('categories', { keyPath: 'id' });
+              catStore.createIndex('type', 'type', { unique: false });
+            }
+
+            // Targets store
+            if (!database.objectStoreNames.contains('targets')) {
+              database.createObjectStore('targets', { keyPath: 'id' });
+            }
+
+            // Settings store
+            if (!database.objectStoreNames.contains('settings')) {
+              database.createObjectStore('settings', { keyPath: 'key' });
+            }
+          };
+        });
+      }
+
+      // DB Helper functions
+      async function dbGet(store, key) {
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(store, 'readonly');
+          const request = tx.objectStore(store).get(key);
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      async function dbGetAll(store) {
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(store, 'readonly');
+          const request = tx.objectStore(store).getAll();
+          request.onsuccess = () => resolve(request.result || []);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      async function dbPut(store, data) {
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(store, 'readwrite');
+          const request = tx.objectStore(store).put(data);
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      async function dbDelete(store, key) {
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(store, 'readwrite');
+          const request = tx.objectStore(store).delete(key);
+          request.onsuccess = () => resolve();
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      async function dbClear(store) {
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(store, 'readwrite');
+          const request = tx.objectStore(store).clear();
+          request.onsuccess = () => resolve();
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      // Initialize default data
+      async function initDefaultData() {
+        const categories = await dbGetAll('categories');
+
+        if (categories.length === 0) {
+          for (const cat of defaultIncomeCategories) {
+            await dbPut('categories', { ...cat, type: 'income' });
+          }
+          for (const cat of defaultExpenseCategories) {
+            await dbPut('categories', { ...cat, type: 'expense' });
+          }
+        }
+
+        const theme = await dbGet('settings', 'theme');
+        if (!theme) {
+          await dbPut('settings', { key: 'theme', value: 'light-clean' });
+        }
+      }
+
+      // Format currency
+      function formatCurrency(amount) {
+        return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(amount);
+      }
+
+      // Format date
+      function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        });
+      }
+
+      // Generate ID
+      function generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+      }
+
+      // Show toast
+      function showToast(message) {
+        const toast = document.getElementById('keuanganku-toast');
+        const toastMessage = document.getElementById('keuanganku-toast-message');
+        toastMessage.textContent = message;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3000);
+      }
+
+      // Navigation
+      function navigateTo(page) {
+        currentPage = page;
+
+        // Hide all pages
+        document.querySelectorAll('.keuanganku-page').forEach(p => {
+          p.classList.add('hidden');
+        });
+
+        // Show target page
+        const targetPage = document.getElementById(`keuanganku-page-${page}`);
+        if (targetPage) {
+          targetPage.classList.remove('hidden');
+          targetPage.querySelector('.keuanganku-animate-fade')?.classList.remove('keuanganku-animate-fade');
+          void targetPage.offsetWidth;
+          targetPage.querySelector('div')?.classList.add('keuanganku-animate-fade');
+        }
+
+        // Update nav items
+        document.querySelectorAll('.keuanganku-nav-item, .keuanganku-bottom-nav-item').forEach(item => {
+          item.classList.toggle('active', item.dataset.page === page);
+        });
+
+        // Refresh page data
+        refreshPageData(page);
+      }
+
+      // Refresh page data
+      async function refreshPageData(page) {
+        switch (page) {
+          case 'dashboard':
+            await renderDashboard();
+            break;
+          case 'income':
+            await renderTransactions('income');
+            break;
+          case 'expense':
+            await renderTransactions('expense');
+            break;
+          case 'targets':
+            await renderTargets();
+            break;
+          case 'statistics':
+            await renderStatistics();
+            break;
+          case 'settings':
+            await renderSettings();
+            break;
+        }
+      }
+
+      // Calculate totals
+      async function calculateTotals() {
+        const transactions = await dbGetAll('transactions');
+        let income = 0, expense = 0;
+
+        transactions.forEach(tx => {
+          if (tx.type === 'income') income += tx.amount;
+          else expense += tx.amount;
+        });
+
+        return { income, expense, balance: income - expense };
+      }
+
+      // Render Dashboard
+      async function renderDashboard() {
+        const totals = await calculateTotals();
+        const transactions = await dbGetAll('transactions');
+        const targets = await dbGetAll('targets');
+
+        // Update stats
+        document.getElementById('keuanganku-stat-balance').textContent = formatCurrency(totals.balance);
+        document.getElementById('keuanganku-stat-income').textContent = formatCurrency(totals.income);
+        document.getElementById('keuanganku-stat-expense').textContent = formatCurrency(totals.expense);
+        document.getElementById('keuanganku-sidebar-balance').textContent = formatCurrency(totals.balance);
+
+        // Recent transactions
+        const recentTx = transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+        const recentContainer = document.getElementById('keuanganku-recent-transactions');
+
+        if (recentTx.length === 0) {
+          recentContainer.innerHTML = `
+            <div class="keuanganku-empty-state text-center py-8">
+              <i class="fas fa-receipt text-4xl mb-3 opacity-30"></i>
+              <p>Belum ada transaksi</p>
+            </div>
+          `;
+        } else {
+          const categories = await dbGetAll('categories');
+          recentContainer.innerHTML = recentTx.map(tx => {
+            const cat = categories.find(c => c.id === tx.category) || {};
+            return `
+              <div class="flex items-center justify-between p-3 rounded-xl" style="background: var(--surface-hover)">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: ${cat.color}20; color: ${cat.color}">
+                    <i class="fas ${cat.icon || 'fa-circle'}"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium" style="color: var(--text-primary)">${cat.name || 'Lainnya'}</p>
+                    <p class="text-xs" style="color: var(--text-secondary)">${formatDate(tx.date)}</p>
+                  </div>
+                </div>
+                <span class="font-bold ${tx.type === 'income' ? 'keuanganku-income' : 'keuanganku-expense'}">
+                  ${tx.type === 'income' ? '+' : '-'}${formatCurrency(tx.amount)}
+                </span>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Active targets
+        const activeTargets = targets.filter(t => t.status === 'active');
+        const targetsSection = document.getElementById('keuanganku-active-targets');
+        const targetsList = document.getElementById('keuanganku-targets-list');
+
+        if (activeTargets.length > 0) {
+          targetsSection.classList.remove('hidden');
+          targetsList.innerHTML = activeTargets.slice(0, 3).map(target => {
+            const progress = Math.min(100, (totals.balance / target.amount) * 100);
+            return `
+              <div class="p-4 rounded-xl" style="background: var(--surface-hover)">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-medium" style="color: var(--text-primary)">${target.name}</span>
+                  <span class="text-sm" style="color: var(--primary)">${progress.toFixed(0)}%</span>
+                </div>
+                <div class="keuanganku-progress-bar h-2 mb-2">
+                  <div class="keuanganku-progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="flex justify-between text-xs" style="color: var(--text-secondary)">
+                  <span>${formatCurrency(Math.min(totals.balance, target.amount))}</span>
+                  <span>${formatCurrency(target.amount)}</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+        } else {
+          targetsSection.classList.add('hidden');
+        }
+
+        // Check warnings
+        await checkTargetWarnings();
+      }
+
+      // Render categories list on income/expense pages
+      async function renderCategoriesList(type) {
+        const categories = await dbGetAll('categories');
+        const filtered = categories.filter(c => c.type === type).sort((a, b) => a.order - b.order);
+      }
+
+      // Render Transactions
+      async function renderTransactions(type) {
+        const transactions = await dbGetAll('transactions');
+        const categories = await dbGetAll('categories');
+        const filtered = transactions.filter(tx => tx.type === type).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const total = filtered.reduce((sum, tx) => sum + tx.amount, 0);
+        document.getElementById(`keuanganku-${type}-total`).textContent = formatCurrency(total);
+
+        // Render categories
+        await renderCategoriesList(type);
+
+        const listContainer = document.getElementById(`keuanganku-${type}-list`);
+
+        if (filtered.length === 0) {
+          listContainer.innerHTML = `
+            <div class="keuanganku-empty-state text-center py-8">
+              <i class="fas ${type === 'income' ? 'fa-piggy-bank' : 'fa-shopping-cart'} text-4xl mb-3 opacity-30"></i>
+              <p>Belum ada ${type === 'income' ? 'pemasukan' : 'pengeluaran'}</p>
+            </div>
+          `;
+        } else {
+          listContainer.innerHTML = filtered.map(tx => {
+            const cat = categories.find(c => c.id === tx.category) || {};
+            return `
+              <div class="flex items-center justify-between p-4 rounded-xl keuanganku-animate-slide" style="background: var(--surface-hover)">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: ${cat.color}20; color: ${cat.color}">
+                    <i class="fas ${cat.icon || 'fa-circle'} text-lg"></i>
+                  </div>
+                  <div>
+                    <p class="font-medium" style="color: var(--text-primary)">${cat.name || 'Lainnya'}</p>
+                    <p class="text-sm" style="color: var(--text-secondary)">${formatDate(tx.date)}${tx.description ? ' • ' + tx.description : ''}</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="font-bold text-lg ${type === 'income' ? 'keuanganku-income' : 'keuanganku-expense'}">
+                    ${formatCurrency(tx.amount)}
+                  </span>
+                  <div class="flex gap-1">
+                    <button onclick="KeuanganKu.editTransaction('${tx.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface); color: var(--primary)">
+                      <i class="fas fa-edit text-sm"></i>
+                    </button>
+                    <button onclick="KeuanganKu.deleteTransaction('${tx.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface); color: var(--danger)">
+                      <i class="fas fa-trash text-sm"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // Render Targets
+      async function renderTargets() {
+        const targets = await dbGetAll('targets');
+        const totals = await calculateTotals();
+        const container = document.getElementById('keuanganku-all-targets');
+
+        if (targets.length === 0) {
+          container.innerHTML = `
+            <div class="keuanganku-empty-state text-center py-12 keuanganku-card">
+              <i class="fas fa-flag-checkered text-4xl mb-3 opacity-30"></i>
+              <p>Belum ada target keuangan</p>
+              <button onclick="KeuanganKu.openTargetModal()" class="keuanganku-btn-primary px-4 py-2 rounded-xl font-medium mt-4">
+                <i class="fas fa-plus mr-2"></i>Buat Target Pertama
+              </button>
+            </div>
+          `;
+        } else {
+          container.innerHTML = targets.sort((a, b) => a.status === 'active' ? -1 : 1).map(target => {
+            const progress = Math.min(100, (totals.balance / target.amount) * 100);
+            const isCompleted = target.status === 'completed' || progress >= 100;
+
+            return `
+              <div class="keuanganku-card-3d p-6">
+                <div class="flex items-start justify-between mb-4">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <h4 class="font-bold text-lg" style="color: var(--text-primary)">${target.name}</h4>
+                      <span class="keuanganku-badge ${isCompleted ? 'keuanganku-badge-income' : ''}" style="${!isCompleted ? 'background: var(--primary); color: white;' : ''}">
+                        ${isCompleted ? 'Selesai' : 'Aktif'}
+                      </span>
+                    </div>
+                    <p class="text-sm" style="color: var(--text-secondary)">
+                      ${formatDate(target.startDate)} - ${formatDate(target.endDate)}
+                    </p>
+                  </div>
+                  <div class="flex gap-1">
+                    <button onclick="KeuanganKu.editTarget('${target.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface-hover); color: var(--primary)">
+                      <i class="fas fa-edit text-sm"></i>
+                    </button>
+                    <button onclick="KeuanganKu.deleteTarget('${target.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface-hover); color: var(--danger)">
+                      <i class="fas fa-trash text-sm"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span style="color: var(--text-secondary)">Progress</span>
+                    <span class="font-bold" style="color: var(--primary)">${progress.toFixed(1)}%</span>
+                  </div>
+                  <div class="keuanganku-progress-bar h-3">
+                    <div class="keuanganku-progress-fill" style="width: ${progress}%"></div>
+                  </div>
+                </div>
+                
+                <div class="flex justify-between">
+                  <div>
+                    <p class="text-xs" style="color: var(--text-secondary)">Terkumpul</p>
+                    <p class="font-bold" style="color: var(--income)">${formatCurrency(Math.min(totals.balance, target.amount))}</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs" style="color: var(--text-secondary)">Target</p>
+                    <p class="font-bold" style="color: var(--text-primary)">${formatCurrency(target.amount)}</p>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // Render Statistics
+      async function renderStatistics() {
+        const totals = await calculateTotals();
+        const transactions = await dbGetAll('transactions');
+        const categories = await dbGetAll('categories');
+
+        // Update summary
+        document.getElementById('keuanganku-stats-income').textContent = formatCurrency(totals.income);
+        document.getElementById('keuanganku-stats-expense').textContent = formatCurrency(totals.expense);
+        document.getElementById('keuanganku-stats-balance').textContent = formatCurrency(totals.balance);
+
+        // Update chart
+        const maxVal = Math.max(totals.income, totals.expense, 1);
+        const incomeHeight = (totals.income / maxVal) * 120;
+        const expenseHeight = (totals.expense / maxVal) * 120;
+
+        document.getElementById('keuanganku-chart-income-bar').style.height = `${Math.max(20, incomeHeight)}px`;
+        document.getElementById('keuanganku-chart-expense-bar').style.height = `${Math.max(20, expenseHeight)}px`;
+
+        // Income stats by category
+        const incomeStats = document.getElementById('keuanganku-income-stats');
+        const incomeByCategory = {};
+        transactions.filter(t => t.type === 'income').forEach(tx => {
+          incomeByCategory[tx.category] = (incomeByCategory[tx.category] || 0) + tx.amount;
+        });
+
+        if (Object.keys(incomeByCategory).length === 0) {
+          incomeStats.innerHTML = `<p class="text-center py-4" style="color: var(--text-secondary)">Belum ada data</p>`;
+        } else {
+          incomeStats.innerHTML = Object.entries(incomeByCategory)
+            .sort((a, b) => b[1] - a[1])
+            .map(([catId, amount]) => {
+              const cat = categories.find(c => c.id === catId) || { name: 'Lainnya', color: '#64748b', icon: 'fa-circle' };
+              const percent = totals.income > 0 ? (amount / totals.income) * 100 : 0;
+              return `
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background: ${cat.color}20; color: ${cat.color}">
+                      <i class="fas ${cat.icon} text-sm"></i>
+                    </div>
+                    <span style="color: var(--text-primary)">${cat.name}</span>
+                  </div>
+                  <div class="text-right">
+                    <p class="font-medium" style="color: var(--text-primary)">${formatCurrency(amount)}</p>
+                    <p class="text-xs" style="color: var(--text-secondary)">${percent.toFixed(1)}%</p>
+                  </div>
+                </div>
+              `;
+            }).join('');
+        }
+
+        // Expense stats by category
+        const expenseStats = document.getElementById('keuanganku-expense-stats');
+        const expenseByCategory = {};
+        transactions.filter(t => t.type === 'expense').forEach(tx => {
+          expenseByCategory[tx.category] = (expenseByCategory[tx.category] || 0) + tx.amount;
+        });
+
+        if (Object.keys(expenseByCategory).length === 0) {
+          expenseStats.innerHTML = `<p class="text-center py-4" style="color: var(--text-secondary)">Belum ada data</p>`;
+        } else {
+          expenseStats.innerHTML = Object.entries(expenseByCategory)
+            .sort((a, b) => b[1] - a[1])
+            .map(([catId, amount]) => {
+              const cat = categories.find(c => c.id === catId) || { name: 'Lainnya', color: '#64748b', icon: 'fa-circle' };
+              const percent = totals.expense > 0 ? (amount / totals.expense) * 100 : 0;
+              return `
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background: ${cat.color}20; color: ${cat.color}">
+                      <i class="fas ${cat.icon} text-sm"></i>
+                    </div>
+                    <span style="color: var(--text-primary)">${cat.name}</span>
+                  </div>
+                  <div class="text-right">
+                    <p class="font-medium" style="color: var(--text-primary)">${formatCurrency(amount)}</p>
+                    <p class="text-xs" style="color: var(--text-secondary)">${percent.toFixed(1)}%</p>
+                  </div>
+                </div>
+              `;
+            }).join('');
+        }
+      }
+
+      // Render Settings
+      async function renderSettings() {
+        const currentTheme = (await dbGet('settings', 'theme'))?.value || 'light-clean';
+        const categories = await dbGetAll('categories');
+        const transactions = await dbGetAll('transactions');
+
+        // Themes
+        const themesContainer = document.getElementById('keuanganku-themes');
+        themesContainer.innerHTML = themes.map(theme => `
+          <div onclick="KeuanganKu.setTheme('${theme.id}')" 
+               class="keuanganku-theme-preview p-3 rounded-xl cursor-pointer ${theme.id === currentTheme ? 'active' : ''}"
+               style="background: var(--surface-hover)">
+            <div class="flex gap-1 mb-2">
+              ${theme.colors.map(c => `<div class="w-4 h-4 rounded-full" style="background: ${c}"></div>`).join('')}
+            </div>
+            <p class="text-xs font-medium" style="color: var(--text-primary)">${theme.name}</p>
+          </div>
+        `).join('');
+
+        // Income categories
+        const incomeCategories = categories.filter(c => c.type === 'income').sort((a, b) => a.order - b.order);
+        const incomeCatContainer = document.getElementById('keuanganku-income-categories');
+        incomeCatContainer.innerHTML = incomeCategories.map((cat, index) => {
+          const isUsed = transactions.some(t => t.category === cat.id);
+          return `
+            <div class="flex items-center justify-between p-3 rounded-xl" style="background: var(--surface-hover)">
+              <div class="flex items-center gap-3">
+                <div class="flex flex-col gap-1">
+                  <button onclick="KeuanganKu.moveCategoryUp('${cat.id}', 'income')" 
+                          class="w-6 h-6 rounded flex items-center justify-center ${index === 0 ? 'opacity-30' : ''}" 
+                          style="background: var(--surface)"
+                          ${index === 0 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-up text-xs" style="color: var(--text-secondary)"></i>
+                  </button>
+                  <button onclick="KeuanganKu.moveCategoryDown('${cat.id}', 'income')" 
+                          class="w-6 h-6 rounded flex items-center justify-center ${index === incomeCategories.length - 1 ? 'opacity-30' : ''}" 
+                          style="background: var(--surface)"
+                          ${index === incomeCategories.length - 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-down text-xs" style="color: var(--text-secondary)"></i>
+                  </button>
+                </div>
+                <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: ${cat.color}20; color: ${cat.color}">
+                  <i class="fas ${cat.icon}"></i>
+                </div>
+                <span class="font-medium" style="color: var(--text-primary)">${cat.name}</span>
+                ${isUsed ? '<span class="text-xs px-2 py-0.5 rounded-full" style="background: var(--warning); color: white">Digunakan</span>' : ''}
+              </div>
+              <div class="flex gap-1">
+                ${!isUsed ? `
+                  <button onclick="KeuanganKu.editCategory('${cat.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface); color: var(--primary)">
+                    <i class="fas fa-edit text-sm"></i>
+                  </button>
+                  <button onclick="KeuanganKu.deleteCategory('${cat.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface); color: var(--danger)">
+                    <i class="fas fa-trash text-sm"></i>
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Expense categories
+        const expenseCategories = categories.filter(c => c.type === 'expense').sort((a, b) => a.order - b.order);
+        const expenseCatContainer = document.getElementById('keuanganku-expense-categories');
+        expenseCatContainer.innerHTML = expenseCategories.map((cat, index) => {
+          const isUsed = transactions.some(t => t.category === cat.id);
+          return `
+            <div class="flex items-center justify-between p-3 rounded-xl" style="background: var(--surface-hover)">
+              <div class="flex items-center gap-3">
+                <div class="flex flex-col gap-1">
+                  <button onclick="KeuanganKu.moveCategoryUp('${cat.id}', 'expense')" 
+                          class="w-6 h-6 rounded flex items-center justify-center ${index === 0 ? 'opacity-30' : ''}" 
+                          style="background: var(--surface)"
+                          ${index === 0 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-up text-xs" style="color: var(--text-secondary)"></i>
+                  </button>
+                  <button onclick="KeuanganKu.moveCategoryDown('${cat.id}', 'expense')" 
+                          class="w-6 h-6 rounded flex items-center justify-center ${index === expenseCategories.length - 1 ? 'opacity-30' : ''}" 
+                          style="background: var(--surface)"
+                          ${index === expenseCategories.length - 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-down text-xs" style="color: var(--text-secondary)"></i>
+                  </button>
+                </div>
+                <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: ${cat.color}20; color: ${cat.color}">
+                  <i class="fas ${cat.icon}"></i>
+                </div>
+                <span class="font-medium" style="color: var(--text-primary)">${cat.name}</span>
+                ${isUsed ? '<span class="text-xs px-2 py-0.5 rounded-full" style="background: var(--warning); color: white">Digunakan</span>' : ''}
+              </div>
+              <div class="flex gap-1">
+                ${!isUsed ? `
+                  <button onclick="KeuanganKu.editCategory('${cat.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface); color: var(--primary)">
+                    <i class="fas fa-edit text-sm"></i>
+                  </button>
+                  <button onclick="KeuanganKu.deleteCategory('${cat.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface); color: var(--danger)">
+                    <i class="fas fa-trash text-sm"></i>
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Categories List Modal
+      async function openCategoriesListModal(type) {
+        const modal = document.getElementById('keuanganku-categories-list-modal');
+        const title = document.getElementById('keuanganku-categories-list-title');
+        const container = document.getElementById('keuanganku-categories-list-container');
+        const addLabel = document.getElementById('keuanganku-categories-list-add-label');
+
+        currentCategoryType = type;
+        title.textContent = `Kategori ${type === 'income' ? 'Pemasukan' : 'Pengeluaran'}`;
+        addLabel.textContent = `Tambah Kategori ${type === 'income' ? 'Pemasukan' : 'Pengeluaran'}`;
+
+        const categories = await dbGetAll('categories');
+        const filtered = categories.filter(c => c.type === type).sort((a, b) => a.order - b.order);
+        const transactions = await dbGetAll('transactions');
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="keuanganku-empty-state text-center py-12">
+              <i class="fas fa-tag text-4xl mb-3 opacity-30"></i>
+              <p style="color: var(--text-secondary)">Belum ada kategori</p>
+            </div>
+          `;
+        } else {
+          container.innerHTML = filtered.map(cat => {
+            const isUsed = transactions.some(t => t.category === cat.id);
+            return `
+              <div class="flex items-center justify-between p-4 rounded-xl" style="background: var(--surface-hover)">
+                <div class="flex items-center gap-3 flex-1">
+                  <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: ${cat.color}20; color: ${cat.color}">
+                    <i class="fas ${cat.icon} text-lg"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p class="font-medium" style="color: var(--text-primary)">${cat.name}</p>
+                    <p class="text-xs" style="color: var(--text-secondary)">${isUsed ? 'Sedang digunakan' : 'Tidak digunakan'}</p>
+                  </div>
+                </div>
+                <div class="flex gap-1">
+                  ${isUsed ? `
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--surface); color: var(--warning)">
+                      <i class="fas fa-lock text-sm"></i>
+                    </div>
+                  ` : `
+                    <button onclick="KeuanganKu.editCategory('${cat.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors" style="background: var(--surface); color: var(--primary)" onmouseover="this.style.background='var(--primary)'; this.style.color='white'" onmouseout="this.style.background='var(--surface)'; this.style.color='var(--primary)'">
+                      <i class="fas fa-edit text-sm"></i>
+                    </button>
+                    <button onclick="KeuanganKu.deleteCategory('${cat.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors" style="background: var(--surface); color: var(--danger)" onmouseover="this.style.background='var(--danger)'; this.style.color='white'" onmouseout="this.style.background='var(--surface)'; this.style.color='var(--danger)'">
+                      <i class="fas fa-trash text-sm"></i>
+                    </button>
+                  `}
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeCategoriesListModal() {
+        const modal = document.getElementById('keuanganku-categories-list-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+      async function setTheme(themeId) {
+        await dbPut('settings', { key: 'theme', value: themeId });
+        document.documentElement.setAttribute('data-theme', themeId === 'light-clean' ? '' : themeId);
+        renderSettings();
+        showToast('Tema berhasil diubah');
+      }
+
+      // Transaction Modal
+      async function openTransactionModal(type, id = null) {
+        const modal = document.getElementById('keuanganku-transaction-modal');
+        const form = document.getElementById('keuanganku-transaction-form');
+        const title = document.getElementById('keuanganku-transaction-modal-title');
+        const categorySelect = document.getElementById('keuanganku-transaction-category');
+
+        form.reset();
+        document.getElementById('keuanganku-transaction-id').value = id || '';
+        document.getElementById('keuanganku-transaction-type').value = type;
+        document.getElementById('keuanganku-transaction-date').value = new Date().toISOString().split('T')[0];
+
+        title.textContent = id ? 'Edit Transaksi' : `Tambah ${type === 'income' ? 'Pemasukan' : 'Pengeluaran'}`;
+
+        // Load categories
+        const categories = await dbGetAll('categories');
+        const filtered = categories.filter(c => c.type === type).sort((a, b) => a.order - b.order);
+        categorySelect.innerHTML = '<option value="">Pilih Kategori</option>' +
+          filtered.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+
+        // If editing, load data
+        if (id) {
+          const tx = await dbGet('transactions', id);
+          if (tx) {
+            document.getElementById('keuanganku-transaction-amount').value = tx.amount;
+            document.getElementById('keuanganku-transaction-category').value = tx.category;
+            document.getElementById('keuanganku-transaction-date').value = tx.date;
+            document.getElementById('keuanganku-transaction-description').value = tx.description || '';
+          }
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeTransactionModal() {
+        const modal = document.getElementById('keuanganku-transaction-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      async function saveTransaction(e) {
+        e.preventDefault();
+
+        const id = document.getElementById('keuanganku-transaction-id').value;
+        const type = document.getElementById('keuanganku-transaction-type').value;
+        const amount = parseInt(document.getElementById('keuanganku-transaction-amount').value);
+        const category = document.getElementById('keuanganku-transaction-category').value;
+        const date = document.getElementById('keuanganku-transaction-date').value;
+        const description = document.getElementById('keuanganku-transaction-description').value;
+
+        if (!amount || amount <= 0 || !category || !date) {
+          showToast('Mohon lengkapi semua field');
+          return;
+        }
+
+        const transaction = {
+          id: id || generateId(),
+          type,
+          amount,
+          category,
+          date,
+          description,
+          createdAt: id ? (await dbGet('transactions', id))?.createdAt : new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        await dbPut('transactions', transaction);
+        closeTransactionModal();
+        showToast(id ? 'Transaksi berhasil diperbarui' : 'Transaksi berhasil ditambahkan');
+
+        refreshPageData(currentPage);
+        renderDashboard();
+      }
+
+      async function editTransaction(id) {
+        const tx = await dbGet('transactions', id);
+        if (tx) {
+          openTransactionModal(tx.type, id);
+        }
+      }
+
+      let pendingDeleteId = null;
+      let pendingDeleteType = null;
+
+      function deleteTransaction(id) {
+        pendingDeleteId = id;
+        pendingDeleteType = 'transaction';
+        const modal = document.getElementById('keuanganku-confirm-modal');
+        document.getElementById('keuanganku-confirm-title').textContent = 'Hapus Transaksi';
+        document.getElementById('keuanganku-confirm-message').textContent = 'Apakah Anda yakin ingin menghapus transaksi ini?';
+        document.getElementById('keuanganku-confirm-btn').onclick = confirmDelete;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      async function confirmDelete() {
+        if (pendingDeleteType === 'transaction') {
+          await dbDelete('transactions', pendingDeleteId);
+          showToast('Transaksi berhasil dihapus');
+        } else if (pendingDeleteType === 'target') {
+          await dbDelete('targets', pendingDeleteId);
+          showToast('Target berhasil dihapus');
+        } else if (pendingDeleteType === 'category') {
+          await dbDelete('categories', pendingDeleteId);
+          showToast('Kategori berhasil dihapus');
+        } else if (pendingDeleteType === 'reset') {
+          await dbClear('transactions');
+          await dbClear('targets');
+          await dbClear('categories');
+          await initDefaultData();
+          showToast('Semua data berhasil direset');
+        }
+
+        closeConfirmModal();
+        refreshPageData(currentPage);
+        renderDashboard();
+      }
+
+      function closeConfirmModal() {
+        const modal = document.getElementById('keuanganku-confirm-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        pendingDeleteId = null;
+        pendingDeleteType = null;
+      }
+
+      // Target Modal
+      async function openTargetModal(id = null) {
+        const modal = document.getElementById('keuanganku-target-modal');
+        const form = document.getElementById('keuanganku-target-form');
+        const title = document.getElementById('keuanganku-target-modal-title');
+
+        form.reset();
+        document.getElementById('keuanganku-target-id').value = id || '';
+        document.getElementById('keuanganku-target-start').value = new Date().toISOString().split('T')[0];
+
+        title.textContent = id ? 'Edit Target' : 'Tambah Target';
+
+        if (id) {
+          const target = await dbGet('targets', id);
+          if (target) {
+            document.getElementById('keuanganku-target-name').value = target.name;
+            document.getElementById('keuanganku-target-amount').value = target.amount;
+            document.getElementById('keuanganku-target-start').value = target.startDate;
+            document.getElementById('keuanganku-target-end').value = target.endDate;
+          }
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeTargetModal() {
+        const modal = document.getElementById('keuanganku-target-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      async function saveTarget(e) {
+        e.preventDefault();
+
+        const id = document.getElementById('keuanganku-target-id').value;
+        const name = document.getElementById('keuanganku-target-name').value.trim();
+        const amount = parseInt(document.getElementById('keuanganku-target-amount').value);
+        const startDate = document.getElementById('keuanganku-target-start').value;
+        const endDate = document.getElementById('keuanganku-target-end').value;
+
+        if (!name || !amount || amount <= 0 || !startDate || !endDate) {
+          showToast('Mohon lengkapi semua field');
+          return;
+        }
+
+        if (new Date(endDate) <= new Date(startDate)) {
+          showToast('Tanggal selesai harus setelah tanggal mulai');
+          return;
+        }
+
+        const target = {
+          id: id || generateId(),
+          name,
+          amount,
+          startDate,
+          endDate,
+          status: 'active',
+          createdAt: id ? (await dbGet('targets', id))?.createdAt : new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        await dbPut('targets', target);
+        closeTargetModal();
+        showToast(id ? 'Target berhasil diperbarui' : 'Target berhasil ditambahkan');
+
+        refreshPageData(currentPage);
+        renderDashboard();
+      }
+
+      async function editTarget(id) {
+        openTargetModal(id);
+      }
+
+      function deleteTarget(id) {
+        pendingDeleteId = id;
+        pendingDeleteType = 'target';
+        const modal = document.getElementById('keuanganku-confirm-modal');
+        document.getElementById('keuanganku-confirm-title').textContent = 'Hapus Target';
+        document.getElementById('keuanganku-confirm-message').textContent = 'Apakah Anda yakin ingin menghapus target ini?';
+        document.getElementById('keuanganku-confirm-btn').onclick = confirmDelete;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      // Category Modal
+      async function openCategoryModal(type = null, id = null) {
+        const modal = document.getElementById('keuanganku-category-modal');
+        const form = document.getElementById('keuanganku-category-form');
+        const title = document.getElementById('keuanganku-category-modal-title');
+        const categoryType = type || currentCategoryType;
+
+        form.reset();
+        document.getElementById('keuanganku-category-id').value = id || '';
+        document.getElementById('keuanganku-category-type').value = categoryType;
+        document.getElementById('keuanganku-category-color').value = categoryType === 'income' ? '#22c55e' : '#ef4444';
+
+        currentCategoryType = categoryType;
+        selectedCategoryIcon = 'fa-money-bill';
+
+        title.textContent = id ? 'Edit Kategori' : `Tambah Kategori ${categoryType === 'income' ? 'Pemasukan' : 'Pengeluaran'}`;
+
+        // Render icon picker
+        const iconContainer = document.getElementById('keuanganku-category-icons');
+        iconContainer.innerHTML = fontAwesomeIcons.map(icon => `
+          <button type="button" 
+                  onclick="KeuanganKu.selectIcon('${icon}')" 
+                  class="w-10 h-10 rounded-lg flex items-center justify-center transition-all" 
+                  style="background: ${icon === selectedCategoryIcon ? 'var(--primary)' : 'var(--surface-hover)'}; color: ${icon === selectedCategoryIcon ? 'white' : 'var(--text-primary)'};"
+                  data-icon-btn="${icon}">
+            <i class="fas ${icon} text-lg"></i>
+          </button>
+        `).join('');
+
+        // If editing, load data
+        if (id) {
+          const cat = await dbGet('categories', id);
+          if (cat) {
+            document.getElementById('keuanganku-category-name').value = cat.name;
+            document.getElementById('keuanganku-category-color').value = cat.color;
+            selectedCategoryIcon = cat.icon;
+
+            // Update icon button styling
+            const buttons = iconContainer.querySelectorAll('button');
+            buttons.forEach(btn => {
+              const icon = btn.dataset.iconBtn;
+              if (icon === cat.icon) {
+                btn.style.background = 'var(--primary)';
+                btn.style.color = 'white';
+              } else {
+                btn.style.background = 'var(--surface-hover)';
+                btn.style.color = 'var(--text-primary)';
+              }
+            });
+          }
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeCategoryModal() {
+        const modal = document.getElementById('keuanganku-category-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      function selectIcon(icon) {
+        selectedCategoryIcon = icon;
+        const buttons = document.querySelectorAll('#keuanganku-category-icons button');
+        buttons.forEach(btn => {
+          const btnIcon = btn.dataset.iconBtn;
+          if (btnIcon === icon) {
+            btn.style.background = 'var(--primary)';
+            btn.style.color = 'white';
+          } else {
+            btn.style.background = 'var(--surface-hover)';
+            btn.style.color = 'var(--text-primary)';
+          }
+        });
+      }
+
+      async function saveCategory(e) {
+        e.preventDefault();
+
+        const id = document.getElementById('keuanganku-category-id').value;
+        const type = document.getElementById('keuanganku-category-type').value;
+        const name = document.getElementById('keuanganku-category-name').value.trim();
+        const icon = selectedCategoryIcon;
+        const color = document.getElementById('keuanganku-category-color').value;
+
+        if (!name || !icon || !color) {
+          showToast('Mohon lengkapi semua field');
+          return;
+        }
+
+        const categories = await dbGetAll('categories');
+        const sameTypeCategories = categories.filter(c => c.type === type);
+        const maxOrder = sameTypeCategories.length > 0 ? Math.max(...sameTypeCategories.map(c => c.order)) : -1;
+
+        const category = {
+          id: id || generateId(),
+          type,
+          name,
+          icon,
+          color,
+          order: id ? (await dbGet('categories', id))?.order : maxOrder + 1,
+          createdAt: id ? (await dbGet('categories', id))?.createdAt : new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        await dbPut('categories', category);
+        closeCategoryModal();
+        showToast(id ? 'Kategori berhasil diperbarui' : 'Kategori berhasil ditambahkan');
+
+        renderSettings();
+        if (currentPage === 'income' || currentPage === 'expense') {
+          await renderTransactions(currentPage);
+        }
+      }
+
+      async function editCategory(id) {
+        const cat = await dbGet('categories', id);
+        if (cat) {
+          openCategoryModal(cat.type, id);
+        }
+      }
+
+      async function deleteCategory(id) {
+        const transactions = await dbGetAll('transactions');
+        const isUsed = transactions.some(t => t.category === id);
+
+        if (isUsed) {
+          showToast('Kategori sedang digunakan dan tidak dapat dihapus');
+          return;
+        }
+
+        pendingDeleteId = id;
+        pendingDeleteType = 'category';
+        const modal = document.getElementById('keuanganku-confirm-modal');
+        document.getElementById('keuanganku-confirm-title').textContent = 'Hapus Kategori';
+        document.getElementById('keuanganku-confirm-message').textContent = 'Apakah Anda yakin ingin menghapus kategori ini?';
+        document.getElementById('keuanganku-confirm-btn').onclick = confirmDelete;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      async function moveCategoryUp(id, type) {
+        const categories = await dbGetAll('categories');
+        const filtered = categories.filter(c => c.type === type).sort((a, b) => a.order - b.order);
+        const index = filtered.findIndex(c => c.id === id);
+
+        if (index > 0) {
+          const temp = filtered[index].order;
+          filtered[index].order = filtered[index - 1].order;
+          filtered[index - 1].order = temp;
+
+          await dbPut('categories', filtered[index]);
+          await dbPut('categories', filtered[index - 1]);
+
+          renderSettings();
+        }
+      }
+
+      async function moveCategoryDown(id, type) {
+        const categories = await dbGetAll('categories');
+        const filtered = categories.filter(c => c.type === type).sort((a, b) => a.order - b.order);
+        const index = filtered.findIndex(c => c.id === id);
+
+        if (index < filtered.length - 1) {
+          const temp = filtered[index].order;
+          filtered[index].order = filtered[index + 1].order;
+          filtered[index + 1].order = temp;
+
+          await dbPut('categories', filtered[index]);
+          await dbPut('categories', filtered[index + 1]);
+
+          renderSettings();
+        }
+      }
+
+      // Target warnings
+      async function checkTargetWarnings() {
+        const targets = await dbGetAll('targets');
+        const now = new Date();
+        const warningBanner = document.getElementById('keuanganku-warning-banner');
+        const warningText = document.getElementById('keuanganku-warning-text');
+
+        const urgentTargets = targets.filter(t => {
+          if (t.status !== 'active') return false;
+          const endDate = new Date(t.endDate);
+          const daysLeft = Math.ceil((endDate - now) / (1000 * 60 * 60 * 24));
+          return daysLeft >= 0 && daysLeft <= 3;
+        });
+
+        if (urgentTargets.length > 0) {
+          const names = urgentTargets.map(t => t.name).join(', ');
+          warningText.textContent = `⚠️ Target mendekati deadline: ${names}`;
+          warningBanner.classList.remove('hidden');
+        } else {
+          warningBanner.classList.add('hidden');
+        }
+      }
+
+      // Data management
+      async function exportData() {
+        const transactions = await dbGetAll('transactions');
+        const categories = await dbGetAll('categories');
+        const targets = await dbGetAll('targets');
+        const settings = await dbGetAll('settings');
+
+        const data = { transactions, categories, targets, settings, exportedAt: new Date().toISOString() };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `keuanganku-backup-${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        showToast('Data berhasil diexport');
+      }
+
+      async function importData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          try {
+            const data = JSON.parse(e.target.result);
+
+            if (data.transactions) {
+              for (const tx of data.transactions) {
+                await dbPut('transactions', tx);
+              }
+            }
+
+            if (data.categories) {
+              for (const cat of data.categories) {
+                await dbPut('categories', cat);
+              }
+            }
+
+            if (data.targets) {
+              for (const target of data.targets) {
+                await dbPut('targets', target);
+              }
+            }
+
+            if (data.settings) {
+              for (const setting of data.settings) {
+                await dbPut('settings', setting);
+              }
+            }
+
+            showToast('Data berhasil diimport');
+            refreshPageData(currentPage);
+            renderDashboard();
+
+            // Reset input
+            document.getElementById('keuanganku-import-file').value = '';
+          } catch (error) {
+            showToast('Gagal mengimport data. Format file tidak valid.');
+            document.getElementById('keuanganku-import-file').value = '';
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      function confirmResetData() {
+        pendingDeleteType = 'reset';
+        const modal = document.getElementById('keuanganku-confirm-modal');
+        document.getElementById('keuanganku-confirm-title').textContent = 'Reset Semua Data';
+        document.getElementById('keuanganku-confirm-message').textContent = 'Semua data akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan!';
+        document.getElementById('keuanganku-confirm-btn').onclick = confirmDelete;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      // Initialize app
+      async function init() {
+        try {
+          await initDB();
+          await initDefaultData();
+
+          // Load theme
+          const theme = await dbGet('settings', 'theme');
+          if (theme && theme.value !== 'light-clean') {
+            document.documentElement.setAttribute('data-theme', theme.value);
+          }
+
+          // Hide loading, show app
+          setTimeout(() => {
+            document.getElementById('keuanganku-loading').style.opacity = '0';
+            setTimeout(() => {
+              document.getElementById('keuanganku-loading').style.display = 'none';
+              document.getElementById('keuanganku-app').style.opacity = '1';
+              navigateTo('dashboard');
+            }, 500);
+          }, 1000);
+
+          // Element SDK init
+          if (window.elementSdk) {
+            const defaultConfig = { app_title: 'KeuanganKu' };
+
+            window.elementSdk.init({
+              defaultConfig,
+              onConfigChange: async (config) => {
+                appTitle = config.app_title || defaultConfig.app_title;
+                const titleEl = document.getElementById('keuanganku-title');
+                if (titleEl) titleEl.textContent = appTitle;
+              },
+              mapToCapabilities: () => ({
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+              }),
+              mapToEditPanelValues: (config) => new Map([
+                ['app_title', config.app_title || defaultConfig.app_title]
+              ])
+            });
+          }
+        } catch (error) {
+          console.error('Init error:', error);
+        }
+      }
+
+      // DETECT INSTALL PROMPT
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Tampilkan tombol install di settings
+        showInstallButton();
+      });
+
+      // Detect sudah terinstall
+      window.addEventListener("appinstalled", () => {
+        isPWAInstalled = true;
+        hideInstallButton();
+        KeuanganKu.showToast("Aplikasi berhasil diinstall 🚀");
+      });
+
+      function showInstallButton() {
+        // otomatis tampilkan modal realtime
+        setTimeout(() => {
+          document.getElementById("keuanganku-install-modal").classList.remove("hidden");
+        }, 1500);
+      }
+
+      function hideInstallButton() {
+        document.getElementById("keuanganku-install-modal").classList.add("hidden");
+      }
+
+      function closeInstallModal() {
+        hideInstallButton();
+      }
+
+      async function installPWA() {
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+
+        if (choiceResult.outcome === "accepted") {
+          KeuanganKu.showToast("Sedang menginstall...");
+        }
+
+        deferredPrompt = null;
+        hideInstallButton();
+      }
+
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        isPWAInstalled = true;
+      }
+
+      // Start app
+      init();
+
+      // Public API
+      return {
+        navigateTo,
+        openTransactionModal,
+        closeTransactionModal,
+        saveTransaction,
+        editTransaction,
+        deleteTransaction,
+        openTargetModal,
+        closeTargetModal,
+        saveTarget,
+        editTarget,
+        deleteTarget,
+        openCategoryModal,
+        closeCategoryModal,
+        saveCategory,
+        editCategory,
+        deleteCategory,
+        moveCategoryUp,
+        moveCategoryDown,
+        selectIcon,
+        openCategoriesListModal,
+        closeCategoriesListModal,
+        setTheme,
+        exportData,
+        importData,
+        confirmResetData,
+        closeConfirmModal,
+        installPWA,
+        closeInstallModal
+      };
+    })();
+  </script>
+  <script>
+    // REGISTER SERVICE WORKER
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+          .then(reg => console.log("SW Registered"))
+          .catch(err => console.error("SW Error:", err));
+      });
+    }
+  </script>
+</body>
+
+</html>
